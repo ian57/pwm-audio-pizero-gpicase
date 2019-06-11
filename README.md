@@ -61,9 +61,13 @@ If you have setup buildroot as described in https://github.com/recalbox/recalbox
 ```bash
 output/build/linux-FIRMWARE/scripts/dtc/dtc -@ -I dts -O dtb -o pwm-audio-pi-zero-overlay.dtbo pwm-audio-pi-zero-overlay.dts
 ```
-and you copy the pwm-audio-pi-zero-overlay.dtbo file in /boot/overlays of your recalbox. The configuration is now simpler : 
+with newer kernel you should use : 
+```bash
+output/build/linux-custom/scripts/dtc/dtc -W no-unit_address_vs_reg -@ -I dts -O dtb -o pwm-audio-pizero-gpicase-overlay.dtbo pwm-audio-pizero-gpicase-overlay.dts
+```
+and you copy the pwm-audio-pizero-gpicase-overlay.dtbo file in /boot/overlays of your recalbox. The configuration is now simpler : 
 ```ini
-dtoverlay=pwm-audio-pi-zero
+dtoverlay=pwm-audio-pizero-gpicase
 ```
 #Quick test of the sound output
 
