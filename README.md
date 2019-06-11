@@ -22,10 +22,12 @@ The solution consists in getting to PWM0 on GPIO #18 (ALT5) and PWM1 on GPIO #13
 
 The manipulation is discribed in details in the page https://learn.adafruit.com/adding-basic-audio-ouput-to-raspberry-pi-zero/pi-zero-pwm-audio
 
-With recalbox, the simpler way is to add this line in the `config.txt` file. It will reconfigure the pins at boot without any external software or services. The PWMO will be on the GPIO #18 (pin 12 on the connector), and PWM1 on GPIO #13 (pin 33 on the connector).
+With recalbox, the simpler way is to add this line in the `config.txt` file. It will reconfigure the pins at boot without any external software or services. The PWMO will be on the GPIO #18 (pin 12 on the connector), and PWM1 on GPIO #19 (pin 35 on the connector). THIS CONFIGURATION IS SPECIFIC FOR GPI CASE. It uses a DPI TFT screen and its configuration uses RGB 666 Mode 5 see the tablr below :
+
+![dpi-packing.png](http://images.morere.eu/dpi-packing.png)
 
 ```ini
-dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
+dtoverlay=pwm-2chan,pin=18,func=2,pin2=19,func2=4
 ```
 
 As described in the page https://hackaday.io/project/9467-piboy-zero/log/35090-pi-zero-pwm-audio-device-tree-overlay, you can make you own overlay with the following source code
@@ -45,8 +47,8 @@ As described in the page https://hackaday.io/project/9467-piboy-zero/log/35090-p
       pinctrl-0 = <&pwm_audio_pins>;
 
     pwm_audio_pins: pwm_audio_pins {
-	brcm,pins = <13 18>;   /* gpio no ('BCM' number) */
-	brcm,function = <4 2>; /* 0:in, 1:out, 2: alt5, 3: alt4, 4: alt0, 5: alt1, 6: alt2, 7: alt3 */
+	brcm,pins = <18 19>;   /* gpio no ('BCM' number) */
+	brcm,function = <2 2>; /* 0:in, 1:out, 2: alt5, 3: alt4, 4: alt0, 5: alt1, 6: alt2, 7: alt3 */
 	brcm,pull = <0 0>;     /* 2:up 1:down 0:none */
       };
     };
