@@ -45,8 +45,8 @@ As described in the page https://hackaday.io/project/9467-piboy-zero/log/35090-p
       pinctrl-0 = <&pwm_audio_pins>;
 
     pwm_audio_pins: pwm_audio_pins {
-	brcm,pins = <13 18>;   /* gpio no ('BCM' number) */
-	brcm,function = <4 2>; /* 0:in, 1:out, 2: alt5, 3: alt4, 4: alt0, 5: alt1, 6: alt2, 7: alt3 */
+	brcm,pins = <12 13>;   /* gpio no ('BCM' number) */
+	brcm,function = <2 2>; /* 0:in, 1:out, 2: alt5, 3: alt4, 4: alt0, 5: alt1, 6: alt2, 7: alt3 */
 	brcm,pull = <0 0>;     /* 2:up 1:down 0:none */
       };
     };
