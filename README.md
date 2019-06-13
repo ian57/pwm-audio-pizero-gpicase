@@ -22,10 +22,12 @@ The solution consists in getting to PWM0 on GPIO #18 (ALT5) and PWM1 on GPIO #13
 
 The manipulation is discribed in details in the page https://learn.adafruit.com/adding-basic-audio-ouput-to-raspberry-pi-zero/pi-zero-pwm-audio
 
-With recalbox, the simpler way is to add this line in the `config.txt` file. It will reconfigure the pins at boot without any external software or services. The PWMO will be on the GPIO #18 (pin 12 on the connector), and PWM1 on GPIO #13 (pin 33 on the connector).
+With recalbox, the simpler way is to add this line in the `config.txt` file. It will reconfigure the pins at boot without any external software or services. The PWMO will be on the GPIO #18 (pin 12 on the connector), and PWM1 on GPIO #19 (pin 35 on the connector). THIS CONFIGURATION IS SPECIFIC FOR GPI CASE. It uses a DPI TFT screen and its configuration uses RGB 666 Mode 5 see the tablr below :
+
+![dpi-packing.png](http://images.morere.eu/dpi-packing.png)
 
 ```ini
-dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
+dtoverlay=pwm-2chan,pin=18,func=2,pin2=19,func2=4
 ```
 
 As described in the page https://hackaday.io/project/9467-piboy-zero/log/35090-pi-zero-pwm-audio-device-tree-overlay, you can make you own overlay with the following source code
@@ -59,9 +61,13 @@ If you have setup buildroot as described in https://github.com/recalbox/recalbox
 ```bash
 output/build/linux-FIRMWARE/scripts/dtc/dtc -@ -I dts -O dtb -o pwm-audio-pi-zero-overlay.dtbo pwm-audio-pi-zero-overlay.dts
 ```
-and you copy the pwm-audio-pi-zero-overlay.dtbo file in /boot/overlays of your recalbox. The configuration is now simpler : 
+with newer kernel you should use : 
+```bash
+output/build/linux-custom/scripts/dtc/dtc -W no-unit_address_vs_reg -@ -I dts -O dtb -o pwm-audio-pizero-gpicase-overlay.dtbo pwm-audio-pizero-gpicase-overlay.dts
+```
+and you copy the pwm-audio-pizero-gpicase-overlay.dtbo file in /boot/overlays of your recalbox. The configuration is now simpler : 
 ```ini
-dtoverlay=pwm-audio-pi-zero
+dtoverlay=pwm-audio-pizero-gpicase
 ```
 #Quick test of the sound output
 
